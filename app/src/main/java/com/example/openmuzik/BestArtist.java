@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -46,6 +47,17 @@ public class BestArtist extends AppCompatActivity {
                 AlbumDetail albumDetail=albumList.get(position);
                 mediaPlayer= MediaPlayer.create(BestArtist.this,albumDetail.getAudioId());
                 mediaPlayer.start();
+
+
+
+                mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener(){
+                    @Override
+                    public void onCompletion(MediaPlayer mp){
+                        mediaPlayer.release();
+
+                        Log.i("exit","done");
+                    }
+                });
             }
         });
 

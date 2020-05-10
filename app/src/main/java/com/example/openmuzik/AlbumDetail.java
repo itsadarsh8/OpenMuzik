@@ -39,6 +39,16 @@ public class AlbumDetail {
     public boolean hasImage() { return (mImageId != IMAGE_PRESENT);}
 
     public int getAudioId(){return mAudioId;}
+
+    @Override
+    public String toString() {
+        return "AlbumDetail{" +
+                "mArtistName='" + mArtistName + '\'' +
+                ", mMusicName='" + mMusicName + '\'' +
+                ", mImageId=" + mImageId +
+                ", mAudioId=" + mAudioId +
+                '}';
+    }
 }
 
 

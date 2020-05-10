@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -13,7 +14,7 @@ import java.util.ArrayList;
 
 public class Weekly extends AppCompatActivity {
 
-   // private MediaPlayer mediaPlayer;
+    private MediaPlayer mediaPlayer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,10 +46,22 @@ public class Weekly extends AppCompatActivity {
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                AlbumDetail albumDetail=albumList.get(position);
+                mediaPlayer=MediaPlayer.create(Weekly
+                        .this,albumDetail.getAudioId());
+                mediaPlayer.start();
 
-                Toast.makeText(Weekly.this,"touch",Toast.LENGTH_LONG).show();
 
+
+                mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener(){
+                    @Override
+                    public void onCompletion(MediaPlayer mp){
+                        mediaPlayer.release();
+
+                        Log.i("exit","done");
+                    }
+                });
             }
         });
 
